@@ -1,0 +1,68 @@
+---
+title: "Transcript verification quickstart"
+icon: "code"
+---
+
+### Overview
+
+This endpoint retrieves all transcript verification results for a given inquiry. Transcript verifications contain AI-verified information extracted from call transcripts, including verification items that check specific criteria (e.g., patient eligibility, coverage details, etc.).
+
+The results are returned sorted by creation time, with the most recent verification first.
+
+### Example Request
+
+<CodeGroup>
+
+```bash cURL
+curl -u [PROJECT_ID]:[API_KEY] --request GET "https://healthharbor.co/api/v0/verification?inquiry_id={INQUIRY_ID}
+```
+
+```python Python
+url = 'https://healthharbor.co/api/v0/verification'
+
+[PROJECT_ID] = 'HEALTH_HARBOR_[PROJECT_ID]'
+[API_KEY] = 'HEALTH_HARBOR_CREDENTIALS'
+
+
+request = request.get(
+  url = url,
+  params={"inquiry_id": INQUIRY_ID},
+  auth=([PROJECT_ID], [API_KEY])
+)
+```
+
+</CodeGroup>
+
+### Response
+
+The response includes a list of all verifications for the inquiry, sorted by creation time (newest first):
+
+<CodeGroup>
+```json JSON
+{
+  "success": true,
+  "count": 2,
+  "verifications": [
+    {
+      "id": "verification_123",
+      "inquiry_id": "INQUIRY_ID",
+      "call_log_id": "call_log_456",
+      "verification_items": [
+        {
+          "name": "Patient Eligibility",
+          "description": "Verifies that the patient is eligible for coverage",
+          "status": "MET",
+          "evidence": "Representative confirmed patient is active",
+          "reasoning": "The transcript shows clear confirmation of active status"
+        }
+      ],
+      "creation_ts": "2024-03-19T10:30:00Z"
+    }
+  ]
+}
+```
+</CodeGroup>
+
+<Info>
+  If no verifications are found for the inquiry, the endpoint returns an empty array with `count: 0`.
+</Info>

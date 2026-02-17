@@ -78,6 +78,13 @@
         "api-reference/endpoint/get-medical-inquiry",
         "api-reference/endpoint/get-medical-inquiries"
       ]
+    },
+    {
+      "group": "Transcripts",
+      "pages": [
+        "api-reference/transcript-verification-quickstart",
+        "api-reference/endpoint/get-transcript-verifications"
+      ]
     }
   ],
   "footerSocials": {
